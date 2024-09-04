@@ -2,27 +2,26 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
+import java.util.ArrayList;
 
 public class GameWindow extends JFrame {
 
     private static final int SLEEP = 25;
 
     private JPanel panel;
-    private Random rnd = new Random();
     private boolean playing = true;
-    private int radius = 25;
+    private ArrayList<Ball> balls;
     private BufferedImage bufferedImage;
     private Graphics2D bufferedEngine;
     private long before;
     private int score;
-    private int x = randomNumber(radius * 2, 800 - radius * 2);
-    private int y = randomNumber(radius * 2, 600 - radius * 2);
-    private int dx = randomNumber(0, 1) == 0 ? 5 : -5;
-    private int dy = randomNumber(0, 1) == 0 ? 5 : -5;
+
 
     public GameWindow() {
         InitWindow();
         InitPanel();
+        balls = new ArrayList<Ball>();
+        balls.add(new Ball(25));
         add(panel);
     }
 
@@ -63,21 +62,19 @@ public class GameWindow extends JFrame {
     }
 
     private void update() {
-        x += dx;
-        y += dy;
-        if (y <= radius || y >= 600 - radius * 2) {
-            dy *= -1;
-            score += 10;
-        }
-        if (x <= radius || x >= 800 - radius) {
-            dx *= -1;
-            score += 10;
+        for (Ball ball : balls){
+            ball.update();
+            if (ball.hasTouched()) {
+                score += 10;
+            }
         }
     }
 
     private void drawOnBuffer() {
-        bufferedEngine.setPaint(Color.RED);
-        bufferedEngine.fillOval(x - radius, y - radius, radius * 2, radius * 2);
+        for (Ball ball: balls) {
+            ball.draw(bufferedEngine);
+        }
+
 
         bufferedEngine.setPaint(Color.WHITE);
         bufferedEngine.drawString("Score: " + score, 10, 20);
@@ -106,7 +103,5 @@ public class GameWindow extends JFrame {
         panel.setDoubleBuffered(true);
     }
 
-    private int randomNumber(int min, int max) {
-        return rnd.nextInt((max - min) + 1) + min;
-    }
+
 }

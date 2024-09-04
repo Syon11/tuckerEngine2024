@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/source/source.iml" filepath="$PROJECT_DIR$/source/source.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BouncingBalls/source.iml" filepath="$PROJECT_DIR$/BouncingBalls/source.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/tuckerEngine2024.iml" filepath="$PROJECT_DIR$/.idea/tuckerEngine2024.iml" />
     </modules>
   </component>

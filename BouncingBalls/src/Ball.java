@@ -56,7 +56,7 @@ public class Ball {
     }
 
     private boolean hasTouchedVertical() {
-        return y <= radius || y >= 600 - radius * 2;
+        return y <= radius || y >= 600 - radius;
     }
 
     private boolean hasTouchedHorizontal() {

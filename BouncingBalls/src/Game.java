@@ -1,32 +1,31 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Random;
 import java.util.ArrayList;
 
-public class GameWindow extends JFrame {
+public class Game {
 
     private static final int SLEEP = 25;
 
+    private JFrame frame;
     private JPanel panel;
     private boolean playing = true;
     private ArrayList<Ball> balls;
     private BufferedImage bufferedImage;
-    private Graphics2D bufferedEngine;
+    private Graphics2D bufferEngine;
     private long before;
     private int score;
 
 
-    public GameWindow() {
+    public Game() {
         InitWindow();
         InitPanel();
-        balls = new ArrayList<Ball>();
-        balls.add(new Ball(25));
-        add(panel);
+        initBalls();
+        frame.add(panel);
     }
 
     public void start() {
-        setVisible(true);
+        frame.setVisible(true);
         before = System.currentTimeMillis();
 
         while (playing) {
@@ -38,8 +37,8 @@ public class GameWindow extends JFrame {
             hints.put(
                     RenderingHints.KEY_RENDERING,
                     RenderingHints.VALUE_RENDER_QUALITY);
-            bufferedEngine = bufferedImage.createGraphics();
-            bufferedEngine.setRenderingHints(hints);
+            bufferEngine = bufferedImage.createGraphics();
+            bufferEngine.setRenderingHints(hints);
 
             update();
             drawOnBuffer();
@@ -61,6 +60,13 @@ public class GameWindow extends JFrame {
         }
     }
 
+    private void initBalls() {
+        balls = new ArrayList<Ball>();
+        balls.add(new Ball(25));
+        balls.add(new Ball(50));
+        balls.add(new Ball(75));
+    }
+
     private void update() {
         for (Ball ball : balls){
             ball.update();
@@ -72,12 +78,12 @@ public class GameWindow extends JFrame {
 
     private void drawOnBuffer() {
         for (Ball ball: balls) {
-            ball.draw(bufferedEngine);
+            ball.draw(bufferEngine);
         }
 
 
-        bufferedEngine.setPaint(Color.WHITE);
-        bufferedEngine.drawString("Score: " + score, 10, 20);
+        bufferEngine.setPaint(Color.WHITE);
+        bufferEngine.drawString("Score: " + score, 10, 20);
     }
 
     private void drawBufferOnScreen() {
@@ -88,12 +94,14 @@ public class GameWindow extends JFrame {
     }
 
     private void InitWindow() {
-        setSize(800, 600);
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setTitle("Bouncing Balls");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setState(JFrame.NORMAL);
+        frame = new JFrame();
+        frame.setSize(800, 600);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setTitle("Bouncing Balls");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setState(JFrame.NORMAL);
+        //frame.setUndecorated(true);
     }
 
     private void InitPanel() {

@@ -8,6 +8,11 @@ public class BouncingBallGame extends Game {
 
     public BouncingBallGame() {
         super();
+
+    }
+
+    @Override
+    protected void initialize() {
         initBalls();
     }
 

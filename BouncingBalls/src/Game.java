@@ -27,37 +27,45 @@ public class Game {
     public void start() {
         frame.setVisible(true);
         updateSyncTime();
-
         while (playing) {
             bufferedImage = new BufferedImage(800, 600,
                     BufferedImage.TYPE_INT_RGB);
-            RenderingHints hints = new RenderingHints(
-                    RenderingHints.KEY_ANTIALIASING,
-                    RenderingHints.VALUE_ANTIALIAS_ON);
-            hints.put(
-                    RenderingHints.KEY_RENDERING,
-                    RenderingHints.VALUE_RENDER_QUALITY);
             bufferEngine = bufferedImage.createGraphics();
-            bufferEngine.setRenderingHints(hints);
+            bufferEngine.setRenderingHints(buildRenderingHints());
 
             update();
             drawOnBuffer();
             drawBufferOnScreen();
-
-            long sleep = SLEEP - (System.currentTimeMillis() - before);
-            if (sleep < 4) {
-                sleep = 4;
-            }
-
-            try {
-                Thread.sleep(sleep);
-            }
-            catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-
-            updateSyncTime();
+            sleep();
         }
+    }
+
+    private void sleep () {
+        try {
+            Thread.sleep(getSleepTime());
+        }
+        catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        updateSyncTime();
+    }
+
+    private long getSleepTime() {
+        long sleep = SLEEP - (System.currentTimeMillis() - before);
+        if (sleep < 4) {
+            sleep = 4;
+        }
+        return sleep;
+    }
+
+    private RenderingHints buildRenderingHints() {
+        RenderingHints hints = new RenderingHints(
+                RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+        hints.put(
+                RenderingHints.KEY_RENDERING,
+                RenderingHints.VALUE_RENDER_QUALITY);
+        return hints;
     }
 
     private void update() {

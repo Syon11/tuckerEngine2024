@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.util.ArrayList;
 
-public class BouncingBallGame extends Game {
+public final class BouncingBallGame extends Game {
 
     private int score;
     private ArrayList<Ball> balls;

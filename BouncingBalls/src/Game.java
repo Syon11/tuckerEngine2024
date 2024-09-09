@@ -26,7 +26,7 @@ public class Game {
 
     public void start() {
         frame.setVisible(true);
-        before = System.currentTimeMillis();
+        updateSyncTime();
 
         while (playing) {
             bufferedImage = new BufferedImage(800, 600,
@@ -56,15 +56,8 @@ public class Game {
                 throw new RuntimeException(e);
             }
 
-            before = System.currentTimeMillis();
+            updateSyncTime();
         }
-    }
-
-    private void initBalls() {
-        balls = new ArrayList<Ball>();
-        balls.add(new Ball(25));
-        balls.add(new Ball(50));
-        balls.add(new Ball(75));
     }
 
     private void update() {
@@ -80,8 +73,6 @@ public class Game {
         for (Ball ball: balls) {
             ball.draw(bufferEngine);
         }
-
-
         bufferEngine.setPaint(Color.WHITE);
         bufferEngine.drawString("Score: " + score, 10, 20);
     }
@@ -91,6 +82,17 @@ public class Game {
         graphics.drawImage(bufferedImage, 0, 0, panel);
         Toolkit.getDefaultToolkit().sync();
         graphics.dispose();
+    }
+
+    private void updateSyncTime() {
+        before = System.currentTimeMillis();
+    }
+
+    private void initBalls() {
+        balls = new ArrayList<Ball>();
+        balls.add(new Ball(25));
+        balls.add(new Ball(50));
+        balls.add(new Ball(75));
     }
 
     private void InitWindow() {
@@ -110,6 +112,4 @@ public class Game {
         panel.setFocusable(true);
         panel.setDoubleBuffered(true);
     }
-
-
 }

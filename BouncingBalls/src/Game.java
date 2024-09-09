@@ -1,5 +1,3 @@
-import java.awt.*;
-
 public abstract class Game {
 
     private static final int SLEEP = 25;
@@ -9,7 +7,7 @@ public abstract class Game {
 
     protected abstract void initialize();
     protected abstract void update();
-    protected abstract void drawOnBuffer(Graphics2D bufferEngine);
+    protected abstract void draw(Canvas canvas);
 
     public Game() {
         renderingEngine = new RenderingEngine();
@@ -25,7 +23,7 @@ public abstract class Game {
         updateSyncTime();
         while (playing) {
             update();
-            drawOnBuffer(renderingEngine.buildBuffer());
+            draw(renderingEngine.buildCanvas());
             renderingEngine.drawBufferOnScreen();
             sleep();
         }

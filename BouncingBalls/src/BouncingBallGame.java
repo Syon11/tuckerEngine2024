@@ -27,12 +27,11 @@ public final class BouncingBallGame extends Game {
     }
 
     @Override
-    protected void drawOnBuffer(Graphics2D bufferEngine) {
+    protected void draw(Canvas canvas) {
         for (Ball ball: balls) {
-            ball.draw(bufferEngine);
+            ball.draw(canvas);
         }
-        bufferEngine.setPaint(Color.WHITE);
-        bufferEngine.drawString("Score: " + score, 10, 20);
+        canvas.drawString("Score: " + score, 10, 20, Color.WHITE);
     }
 
     private void initBalls() {

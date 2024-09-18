@@ -32,6 +32,8 @@ public final class BouncingBallGame extends Game {
             ball.draw(canvas);
         }
         canvas.drawString("Score: " + score, 10, 20, Color.WHITE);
+        canvas.drawString(GameTime.getElapsedFormattedTime(), 10, 40, Color.WHITE);
+        canvas.drawString("FPS: " + GameTime.getCurrentFps(), 10, 60, Color.WHITE);
     }
 
     private void initBalls() {

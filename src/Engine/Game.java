@@ -1,5 +1,8 @@
 package Engine;
 
+import java.awt.event.KeyListener;
+import java.security.Key;
+
 public abstract class Game {
 
     private boolean playing = true;
@@ -17,6 +20,10 @@ public abstract class Game {
     public final void start() {
         initialize();
         run();
+    }
+
+    public void addKeyListener(KeyListener keyListener) {
+        renderingEngine.addKeyListener(keyListener);
     }
 
     private void run() {

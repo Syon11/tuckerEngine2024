@@ -9,15 +9,28 @@ public class Player {
     private int x;
     private int y;
     private int speed;
+    private Controller controller;
 
-    public Player() {
+    public Player(Controller controller) {
         this.x = 200;
         this.y = 200;
         this.speed = 3;
+        this.controller = controller;
     }
 
     public void update() {
-        x += speed;
+        if(controller.isDownPressed()) {
+            y += speed;
+        }
+        else if(controller.isUpPressed()) {
+            y -= speed;
+        }
+        else if(controller.isLeftPressed()) {
+            x -= speed;
+        }
+        else if(controller.isRightPressed()) {
+            x += speed;
+        }
     }
 
     public void draw(Canvas canvas) {

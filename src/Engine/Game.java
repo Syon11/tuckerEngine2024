@@ -22,6 +22,10 @@ public abstract class Game {
         run();
     }
 
+    public final void stop() {
+        playing = false;
+    }
+
     public void addKeyListener(KeyListener keyListener) {
         renderingEngine.addKeyListener(keyListener);
     }
@@ -35,6 +39,7 @@ public abstract class Game {
             renderingEngine.drawBufferOnScreen();
             gameTime.synchronize();
         }
+        renderingEngine.stop();
     }
 
 

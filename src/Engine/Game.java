@@ -1,3 +1,5 @@
+package Engine;
+
 public abstract class Game {
 
     private boolean playing = true;

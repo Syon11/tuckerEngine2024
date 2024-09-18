@@ -1,3 +1,7 @@
+package BouncingBall;
+
+import Engine.Canvas;
+
 import java.awt.*;
 import java.util.Random;
 

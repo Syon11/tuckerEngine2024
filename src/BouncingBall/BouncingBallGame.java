@@ -1,3 +1,9 @@
+package BouncingBall;
+
+import Engine.Canvas;
+import Engine.Game;
+import Engine.GameTime;
+
 import java.awt.*;
 import java.util.ArrayList;
 

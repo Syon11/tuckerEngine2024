@@ -11,10 +11,18 @@ public class RenderingEngine {
     private BufferedImage bufferedImage;
     private Graphics2D bufferEngine;
 
-    public RenderingEngine() {
+    private static RenderingEngine instance;
+
+    private RenderingEngine() {
         initWindow();
         initPanel();
-        frame.add(panel);
+    }
+
+    public static RenderingEngine getInstance() {
+        if (instance == null) {
+            instance = new RenderingEngine();
+        }
+        return instance;
     }
 
     public void start() {
@@ -61,6 +69,7 @@ public class RenderingEngine {
         panel.setBackground(Color.BLUE);
         panel.setFocusable(true);
         panel.setDoubleBuffered(true);
+        frame.add(panel);
     }
 
     private RenderingHints buildRenderingHints() {

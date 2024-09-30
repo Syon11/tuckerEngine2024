@@ -29,4 +29,8 @@ public class Canvas {
         graphics.setPaint(paint);
         graphics.fillRect(x, y, width, height);
     }
+
+    public void drawRectangle(StaticEntity staticEntity, Paint paint) {
+        drawRectangle(staticEntity.getX(), staticEntity.getY(), staticEntity.getWidth(), staticEntity.getHeight(), paint);
+    }
 }

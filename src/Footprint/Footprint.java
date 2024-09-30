@@ -1,21 +1,16 @@
 package Footprint;
 
 import Engine.Canvas;
+import Engine.StaticEntity;
 
 import java.awt.*;
 import java.util.Random;
 
-public class Footprint {
-    private int x;
-    private int y;
-    private int width;
-    private int height;
+public class Footprint extends StaticEntity {
 
     public Footprint(int x, int y) {
-        this.x = x;
-        this.y = y;
-        this.width = 5;
-        this.height = 5;
+        teleport(x, y);
+        resize(5, 5);
     }
 
     public void draw(Canvas canvas) {

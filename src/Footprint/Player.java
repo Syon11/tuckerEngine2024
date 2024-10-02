@@ -1,39 +1,28 @@
 package Footprint;
 
 import Engine.Canvas;
+import Engine.MovableEntity;
 
 import java.awt.*;
 
-public class Player {
+public class Player extends MovableEntity {
     private GamePad gamePad;
-    private int x;
-    private int y;
-    private int speed;
 
     public Player(GamePad gamePad) {
         this.gamePad = gamePad;
-        x = 200;
-        y = 200;
-        speed = 3;
+        teleport(200, 200);
+        resize(20, 60);
+        setSpeed(3);
     }
 
     public void update() {
-        if (gamePad.isDownPressed()) {
-            y += speed;
-        }
-        if (gamePad.isUpPressed()) {
-            y -= speed;
-        }
-        if (gamePad.isLeftPressed()) {
-            x -= speed;
-        }
-        if (gamePad.isRightPressed()) {
-            x += speed;
+        if (gamePad.isMoving()) {
+            move(gamePad.getDirection());
         }
     }
 
     public void draw (Canvas canvas) {
-        canvas.drawRectangle(x, y, 20, 50, Color.WHITE);
+        canvas.drawRectangle(this, Color.WHITE);
     }
 
     public Footprint createFootprint() {

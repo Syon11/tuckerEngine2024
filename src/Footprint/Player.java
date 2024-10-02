@@ -13,6 +13,10 @@ public class Player extends ControllableEntity {
         setSpeed(3);
     }
 
+    public Player(GamePad gamePad, Color color) {
+        this(gamePad);
+    }
+
     @Override
     public void update() {
         moveWithController();

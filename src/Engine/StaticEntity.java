@@ -1,10 +1,13 @@
 package Engine;
 
+import java.awt.*;
+
 public abstract class StaticEntity {
     protected int x;
     protected int y;
     protected int width;
     protected int height;
+
 
     public abstract void draw(Canvas canvas);
 
@@ -17,6 +20,15 @@ public abstract class StaticEntity {
         this.width = width;
         this.height = height;
     }
+
+    protected Rectangle getBounds() {
+        return new Rectangle(x, y, width, height);
+    }
+
+    public boolean collidesWith(StaticEntity other) {
+        return getBounds().intersects(other.getBounds());
+    }
+
 
     public int getX() {
         return x;

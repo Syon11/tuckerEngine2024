@@ -1,6 +1,7 @@
 package Tank;
 
 import Engine.Canvas;
+import Engine.CollidableRepository;
 import Engine.Direction;
 import Engine.MovableEntity;
 
@@ -18,7 +19,7 @@ public class Missile extends MovableEntity{
         direction = tank.getDirection();
         setSpeed(5);
         initialize(tank);
-
+        CollidableRepository.getInstance().register(this);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package Tank;
 
 import Engine.Canvas;
+import Engine.CollidableRepository;
 import Engine.StaticEntity;
 
 import java.awt.*;
@@ -13,6 +14,7 @@ public class Brick extends StaticEntity {
     public Brick(int x, int y) {
         teleport(x, y);
         resize(16, 16);
+        CollidableRepository.getInstance().register(this);
     }
 
     @Override

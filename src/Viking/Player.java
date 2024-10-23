@@ -2,8 +2,8 @@ package Viking;
 
 import Engine.Canvas;
 import Engine.ControllableEntity;
+import Engine.Direction;
 import Engine.MovementController;
-import MovingRectangle.GamePad;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -12,11 +12,16 @@ import java.io.IOException;
 
 public class Player extends ControllableEntity {
     private static final String SPRITE_PATH = "images/player.png";
+    private static final int ANIMATION_SPEED = 8;
+
     private BufferedImage sprite;
     private Image[] rightFrames;
     private Image[] leftFrames;
     private Image[] upFrames;
     private Image[] downFrames;
+
+    private int currentFrame = 1;
+    private int nextFrame = ANIMATION_SPEED;
 
     public Player(MovementController controller) {
         super(controller);
@@ -28,10 +33,34 @@ public class Player extends ControllableEntity {
     public void update() {
         super.update();
         moveWithController();
+        if (hasMoved()){
+            --nextFrame;
+            if (nextFrame <= 0) {
+                nextFrame = ANIMATION_SPEED;
+                ++currentFrame;
+                if (currentFrame >= leftFrames.length) {
+                    currentFrame = 0;
+                }
+            }
+        } else {
+            currentFrame = 1;
+        }
     }
 
     public void draw(Canvas canvas) {
-        canvas.drawImage(downFrames[1], x, y);
+        if (getDirection() == Direction.RIGHT) {
+            canvas.drawImage(rightFrames[currentFrame], x, y);
+        }
+        if (getDirection() == Direction.LEFT) {
+            canvas.drawImage(leftFrames[currentFrame], x, y);
+        }
+        if (getDirection() == Direction.UP) {
+            canvas.drawImage(upFrames[currentFrame], x, y);
+        }
+        if (getDirection() == Direction.DOWN) {
+            canvas.drawImage(downFrames[currentFrame], x, y);
+        }
+
     }
 
     private void load() {

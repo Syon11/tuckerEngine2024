@@ -2,6 +2,7 @@ package Viking;
 
 import Engine.Canvas;
 import Engine.Game;
+import Engine.RenderingEngine;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -31,6 +32,9 @@ public class VikingGame extends Game {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        RenderingEngine.getInstance().getScreen().fullscreen();
+        RenderingEngine.getInstance().getScreen().hideCursor();
     }
 
     @Override

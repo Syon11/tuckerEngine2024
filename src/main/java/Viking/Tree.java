@@ -21,12 +21,12 @@ public class Tree extends StaticEntity {
     }
 
     public void blockadeFromBottom() {
-        blockade.teleport(x+16, y+48);
+        blockade.teleport(worldX +16, worldY+48);
 
     }
 
     public void blockadeFromTop() {
-        blockade.teleport(x+16, y+32);
+        blockade.teleport(worldX +16, worldY+32);
     }
 
     public void load() {
@@ -40,7 +40,7 @@ public class Tree extends StaticEntity {
     }
 
     public void draw(Canvas canvas) {
-        canvas.drawImage(image, x, y);
+        canvas.drawImage(image, worldX, worldY);
         if (GameConfig.isDebugEnabled()) {
             blockade.draw(canvas);
         }

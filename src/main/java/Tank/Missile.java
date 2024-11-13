@@ -25,17 +25,17 @@ public class Missile extends MovableEntity{
     @Override
     public void update() {
         move(direction);
-        if (x > 820 ) {
-            x = -20;
+        if (worldX > 820 ) {
+            worldX = -20;
         }
-        else if (x < -20) {
-            x = 820;
+        else if (worldX < -20) {
+            worldX = 820;
         }
-        else if (y > 620) {
-            y = -20;
+        else if (worldY > 620) {
+            worldY = -20;
         }
-        else if (y < -20) {
-            y = 620;
+        else if (worldY < -20) {
+            worldY = 620;
         }
     }
 
@@ -47,19 +47,19 @@ public class Missile extends MovableEntity{
     private void initialize(Tank tank) {
         if (direction == Direction.RIGHT) {
             resize(WIDTH, HEIGHT);
-            teleport(tank.getX() + tank.getWidth() + OFFSET, tank.getY() + tank.getHeight() / 2 - HEIGHT / 2);
+            teleport(tank.getWorldX() + tank.getWidth() + OFFSET, tank.getY() + tank.getHeight() / 2 - HEIGHT / 2);
         }
         else if (direction == Direction.LEFT) {
             resize(WIDTH, HEIGHT);
-            teleport(tank.getX() - WIDTH - OFFSET, tank.getY() + tank.getHeight() / 2 - HEIGHT / 2);
+            teleport(tank.getWorldX() - WIDTH - OFFSET, tank.getY() + tank.getHeight() / 2 - HEIGHT / 2);
         }
         else if (direction == Direction.UP) {
             resize(HEIGHT, WIDTH);
-            teleport(tank.getX() + tank.getWidth()/2 - HEIGHT/2, tank.getY() - WIDTH - OFFSET);
+            teleport(tank.getWorldX() + tank.getWidth()/2 - HEIGHT/2, tank.getY() - WIDTH - OFFSET);
         }
         else if (direction == Direction.DOWN) {
             resize(HEIGHT, WIDTH);
-            teleport(tank.getX() + tank.getWidth()/2 - HEIGHT/2, tank.getY() + tank.getHeight() + OFFSET);
+            teleport(tank.getWorldX() + tank.getWidth()/2 - HEIGHT/2, tank.getY() + tank.getHeight() + OFFSET);
         }
 
 

@@ -6,11 +6,11 @@ import java.awt.image.BufferedImage;
 
 public class Screen {
 
-    private JFrame frame;
+    private static JFrame frame;
     private Cursor invisibleCursor;
     private GraphicsDevice device;
-    private DisplayMode fullscreenDisplayMode;
-    private boolean isFullscreenMode;
+    private static DisplayMode fullscreenDisplayMode;
+    private static boolean isFullscreenMode;
 
     public Screen() {
         initializeFrame();
@@ -53,11 +53,11 @@ public class Screen {
         frame.add(panel);
     }
 
-    public int getWidth() {
+    public static int getWidth() {
         return isFullscreenMode ? fullscreenDisplayMode.getWidth() : frame.getWidth();
     }
 
-    public int getHeight() {
+    public static int getHeight() {
         return isFullscreenMode ? fullscreenDisplayMode.getHeight() : frame.getHeight();
     }
 

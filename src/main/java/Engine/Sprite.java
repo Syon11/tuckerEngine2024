@@ -8,7 +8,7 @@ import java.io.IOException;
 public class Sprite {
     private BufferedImage spritesheet;
     private final String SPRITE_PATH;
-    private final int ANIMATION_SPEED = 8;
+    private final int ANIMATION_SPEED;
     private final int IDLE_FRAME = 1;
     private int width;
     private int height;
@@ -19,8 +19,9 @@ public class Sprite {
     private int nextFrame = 8;
     private int modifier = 1;
 
-    public Sprite(String spritePath, int rows, int cols) {
+    public Sprite(String spritePath, int rows, int cols, int animationSpeed) {
         this.SPRITE_PATH = spritePath;
+        this.ANIMATION_SPEED = animationSpeed;
         this.rows = rows;
         this.cols = cols;
     }

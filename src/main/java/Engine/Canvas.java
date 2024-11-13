@@ -31,10 +31,14 @@ public class Canvas {
     }
 
     public void drawRectangle(StaticEntity staticEntity, Paint paint) {
-        drawRectangle(staticEntity.getX(), staticEntity.getY(), staticEntity.getWidth(), staticEntity.getHeight(), paint);
+        drawRectangle(staticEntity.getWorldX(), staticEntity.getY(), staticEntity.getWidth(), staticEntity.getHeight(), paint);
     }
 
     public void drawImage(Image image, int x, int y) {
         graphics.drawImage(image, x, y, null);
+    }
+
+    public void drawScaledImage(Image image, int x, int y, int width, int height) {
+        graphics.drawImage(image, x, y, width, height, null);
     }
 }

@@ -3,8 +3,8 @@ package Engine;
 import java.awt.*;
 
 public abstract class StaticEntity {
-    protected int x;
-    protected int y;
+    protected int worldX;
+    protected int worldY;
     protected int width;
     protected int height;
 
@@ -12,8 +12,8 @@ public abstract class StaticEntity {
     public abstract void draw(Canvas canvas);
 
     public void teleport(int x, int y) {
-        this.x = x;
-        this.y = y;
+        this.worldX = x;
+        this.worldY = y;
     }
 
     public void resize(int width, int height) {
@@ -22,7 +22,7 @@ public abstract class StaticEntity {
     }
 
     protected Rectangle getBounds() {
-        return new Rectangle(x, y, width, height);
+        return new Rectangle(worldX, worldY, width, height);
     }
 
     public boolean collidesWith(StaticEntity other) {
@@ -30,12 +30,12 @@ public abstract class StaticEntity {
     }
 
 
-    public int getX() {
-        return x;
+    public int getWorldX() {
+        return worldX;
     }
 
     public int getY() {
-        return y;
+        return worldY;
     }
 
     public int getWidth() {

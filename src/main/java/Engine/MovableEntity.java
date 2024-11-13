@@ -23,11 +23,11 @@ public abstract class MovableEntity extends StaticEntity {
 
     public void move() {
         int allowedSpeed = collision.getAllowedSpeed();
-        x += direction.calculateVelocityX(allowedSpeed);
-        y += direction.calculateVelocityY(allowedSpeed);
-        moved = (lastX != x || lastY != y);
-        lastX = x;
-        lastY = y;
+        worldX += direction.calculateVelocityX(allowedSpeed);
+        worldY += direction.calculateVelocityY(allowedSpeed);
+        moved = (lastX != worldX || lastY != worldY);
+        lastX = worldX;
+        lastY = worldY;
     }
 
     public boolean hasMoved() {
@@ -66,19 +66,19 @@ public abstract class MovableEntity extends StaticEntity {
     }
 
     private Rectangle getLeftHitbox() {
-        return new Rectangle(x - speed, y, speed, height);
+        return new Rectangle(worldX - speed, worldY, speed, height);
     }
 
     private Rectangle getLowerHitbox() {
-        return new Rectangle(x, y + height, width, speed);
+        return new Rectangle(worldX, worldY + height, width, speed);
     }
 
     private Rectangle getRightHitbox() {
-        return new Rectangle(x + width, y, speed, height);
+        return new Rectangle(worldX + width, worldY, speed, height);
     }
 
     private Rectangle getUpperHitbox() {
-        return new Rectangle(x, y - speed, width, speed);
+        return new Rectangle(worldX, worldY - speed, width, speed);
     }
 
     public boolean hitBoxIntersectWith(StaticEntity other) {

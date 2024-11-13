@@ -28,6 +28,6 @@ public class Player extends ControllableEntity {
     }
 
     public Footprint createFootprint() {
-        return new Footprint(x, y);
+        return new Footprint(worldX, worldY);
     }
 }

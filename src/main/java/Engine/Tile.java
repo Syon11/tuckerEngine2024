@@ -33,10 +33,10 @@ public class Tile {
         //Screen.getWidth = width of screen.
         // x = tile's X position in world.
 
-        boolean isWithinLeftBound = x >= worldPosition.getX() - Screen.getWidth() / 2;
-        boolean isWithinRightBound = x <= worldPosition.getX() + Screen.getWidth() / 2;
-        boolean isWithinUpBound = y >= worldPosition.getY() - Screen.getHeight() / 2;
-        boolean isWithingDownBound = y <= worldPosition.getY() + Screen.getHeight() / 2;
+        boolean isWithinLeftBound = x * scale  >= worldPosition.getX() - (gfx.getWidth(null) * scale);
+        boolean isWithinRightBound = (x * scale) + (gfx.getWidth(null) * scale * 5)<= worldPosition.getX() + Screen.getWidth() / 2;
+        boolean isWithinUpBound = y * scale >= worldPosition.getY() - (gfx.getWidth(null) * scale);
+        boolean isWithingDownBound = (y * scale) - (gfx.getHeight(null) * scale * 2) <= worldPosition.getY() + Screen.getHeight() / 2;
 
         return isWithinLeftBound && isWithinRightBound && isWithingDownBound && isWithinUpBound;
     }

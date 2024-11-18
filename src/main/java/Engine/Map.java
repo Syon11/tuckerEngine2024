@@ -46,7 +46,6 @@ public class Map {
 
     private void drawLayer(ArrayList<Tile> layer, Canvas canvas, Vector worldPosition) {
         for(Tile tile : layer) {
-
             if (tile.isInScreen(worldPosition)) {
                 tile.draw(canvas, worldPosition);
             }

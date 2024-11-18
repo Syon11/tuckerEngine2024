@@ -38,6 +38,8 @@ public class Player extends ControllableEntity {
         return new Vector(worldX, worldY);
     }
 
+    public Vector getPlayerPosition() { return new Vector(worldX + screenX, worldY + screenY); }
+
     private void load() {
         sprite.load();
         screenX = (Screen.getWidth() - size.getX()) / 2;

@@ -1,8 +1,10 @@
 package Engine;
 
+import Engine.Enums.CollisionType;
 import Engine.Utility.Vector;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.IntNode;
 
 import java.awt.*;
 import java.io.IOException;
@@ -33,6 +35,12 @@ public class Map {
         }
     }
 
+    public void update(Vector worldPosition) {
+        for(Tile tile : layer1) {
+            tile.update(worldPosition);
+        }
+    }
+
     public void drawEarly(Canvas canvas, Vector worldPosition) {
         canvas.drawString("Screen size: X: " + Screen.getWidth() + "  Y: " + Screen.getHeight(), 100, 100, Color.WHITE);
         canvas.drawString("World position: X " + worldPosition.getX() + "  Y: " + worldPosition.getY(), 100, 120, Color.WHITE);
@@ -56,10 +64,11 @@ public class Map {
         ObjectMapper mapper = new ObjectMapper();
         is = this.getClass().getClassLoader().getResourceAsStream(jsonMapPath);
         JsonNode jsonNode = mapper.readTree(is);
-        String collisionLayerAsText = jsonNode.get("layerInstances").get(0).get("intGridCsv").asText();
         loadLayer(layer3, jsonNode.get("layerInstances").get(1).get("gridTiles"));
         loadLayer(layer2, jsonNode.get("layerInstances").get(2).get("gridTiles"));
         loadLayer(layer1, jsonNode.get("layerInstances").get(3).get("gridTiles"));
+        loadCollisionLayer(layer1, jsonNode.get("layerInstances").get(0).get("intGridCsv"));
+        System.out.println("Blah");
     }
 
     private void loadLayer(ArrayList<Tile> layer, JsonNode node) {
@@ -69,6 +78,24 @@ public class Map {
         }
     }
 
+    private void loadCollisionLayer(ArrayList<Tile> layer, JsonNode node) {
+        int currentTile = 0;
+        for (JsonNode collisionType : node) {
+            switch(collisionType.asInt()) {
+                case 1: layer.get(currentTile).setCollision(CollisionType.TOP_LEFT_FULL);
+                case 2: layer.get(currentTile).setCollision(CollisionType.TOP);
+                case 3: layer.get(currentTile).setCollision(CollisionType.TOP_RIGHT_FULL);
+                case 4: layer.get(currentTile).setCollision(CollisionType.RIGHT);
+                case 5: layer.get(currentTile).setCollision(CollisionType.BOTTOM_RIGHT_FULL);
+                case 6: layer.get(currentTile).setCollision(CollisionType.BOTTOM);
+                case 7: layer.get(currentTile).setCollision(CollisionType.BOTTOM_LEFT_FULL);
+                case 8: layer.get(currentTile).setCollision(CollisionType.LEFT);
+                case 9: layer.get(currentTile).setCollision(CollisionType.FULL);
+            }
+            currentTile++;
+
+        }
+    }
 
 
 

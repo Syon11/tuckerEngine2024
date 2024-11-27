@@ -55,6 +55,7 @@ public class VikingGame extends Game {
             SoundEffect.FIRE.play();
         }
         player.update();
+        world.update(player.getWorldPosition());
 
         /*
         if (player.getY() < tree.getY() + 52) {
@@ -79,5 +80,8 @@ public class VikingGame extends Game {
         }
         */
         player.draw(canvas);
+        player.drawHitbox(canvas);
+        canvas.drawString("Player PositionX: " + player.getX(), 10, 30, Color.WHITE);
+        canvas.drawString("Player PositionY: " + player.getY(), 10, 40, Color.WHITE);
     }
 }

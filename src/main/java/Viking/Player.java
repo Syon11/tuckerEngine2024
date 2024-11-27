@@ -4,20 +4,17 @@ import Engine.*;
 import Engine.Canvas;
 import Engine.Utility.Vector;
 
+import java.awt.*;
+
 public class Player extends ControllableEntity {
     private static final String SPRITE_PATH = "images/trainer.png";
     private static final int ANIMATION_SPEED = 8;
     private int speed = 3;
 
-    private Vector size = new Vector(32, 32);
-    private Sprite sprite = new Sprite(SPRITE_PATH, 4, 3, ANIMATION_SPEED);
-
-    private int screenX;
-    private int screenY;
 
 
     public Player(MovementController controller) {
-        super(controller);
+        super(controller, new Vector(32, 32), new Sprite(SPRITE_PATH, 4, 3, ANIMATION_SPEED));
         resize(size.getX(), size.getY());
         teleport(100, 100);
         setSpeed(speed);
@@ -31,19 +28,19 @@ public class Player extends ControllableEntity {
     }
 
     public void draw(Canvas canvas) {
-        sprite.draw(getDirection(), canvas, screenX, screenY);
+        sprite.draw(getDirection(), canvas, screenOffsetX, screenOffsetY);
     }
 
     public Vector getWorldPosition() {
         return new Vector(worldX, worldY);
     }
 
-    public Vector getPlayerPosition() { return new Vector(worldX + screenX, worldY + screenY); }
+    public Vector getPlayerPosition() { return new Vector(worldX + screenOffsetX, worldY + screenOffsetY); }
 
     private void load() {
         sprite.load();
-        screenX = (Screen.getWidth() - size.getX()) / 2;
-        screenY = (Screen.getHeight() - size.getY()) / 2;
+        screenOffsetX = (Screen.getWidth() - size.getX()) / 2;
+        screenOffsetY = (Screen.getHeight() - size.getY()) / 2;
     }
 
 }

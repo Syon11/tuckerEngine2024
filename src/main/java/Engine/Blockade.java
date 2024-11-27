@@ -1,8 +1,4 @@
-package Viking;
-
-import Engine.Canvas;
-import Engine.CollidableRepository;
-import Engine.StaticEntity;
+package Engine;
 
 import java.awt.*;
 
@@ -11,8 +7,6 @@ public class Blockade extends StaticEntity {
     public Blockade() {
         CollidableRepository.getInstance().register(this);
     }
-
-
 
     @Override
     public void draw(Canvas canvas){

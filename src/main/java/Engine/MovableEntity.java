@@ -4,13 +4,15 @@ import java.awt.*;
 
 public abstract class MovableEntity extends StaticEntity {
 
-    private int speed = 1;
+    protected int speed = 1;
     private Direction direction = Direction.UP;
     private Collision collision;
 
     private int lastX = Integer.MIN_VALUE;
     private int lastY = Integer.MIN_VALUE;
     private boolean moved;
+
+
 
 
     public MovableEntity() {
@@ -20,6 +22,16 @@ public abstract class MovableEntity extends StaticEntity {
     public void update() {
         moved = false;
     };
+
+    @Override
+    public int getX() {
+        return worldX;
+    }
+
+    @Override
+    public int getY() {
+        return worldY;
+    }
 
     public void move() {
         int allowedSpeed = collision.getAllowedSpeed();
@@ -65,19 +77,19 @@ public abstract class MovableEntity extends StaticEntity {
         };
     }
 
-    private Rectangle getLeftHitbox() {
+    protected Rectangle getLeftHitbox() {
         return new Rectangle(worldX - speed, worldY, speed, height);
     }
 
-    private Rectangle getLowerHitbox() {
+    protected Rectangle getLowerHitbox() {
         return new Rectangle(worldX, worldY + height, width, speed);
     }
 
-    private Rectangle getRightHitbox() {
+    protected Rectangle getRightHitbox() {
         return new Rectangle(worldX + width, worldY, speed, height);
     }
 
-    private Rectangle getUpperHitbox() {
+    protected Rectangle getUpperHitbox() {
         return new Rectangle(worldX, worldY - speed, width, speed);
     }
 

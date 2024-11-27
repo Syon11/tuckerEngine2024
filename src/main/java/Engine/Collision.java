@@ -28,11 +28,11 @@ public class Collision {
     }
 
     private int getAllowedLeftSpeed() {
-        return distance(other -> entity.getWorldX() - (other.getWorldX() + other.getWidth()));
+        return distance(other -> entity.getX() - (other.getX() + other.getWidth()));
     }
 
     private int getAllowedRightSpeed() {
-        return distance(other -> other.getWorldX() - (entity.getWorldX() + entity.getWidth()));
+        return distance(other -> other.getX() - (entity.getX() + entity.getWidth()));
     }
 
     private int distance(DistanceCalculator calculator) {

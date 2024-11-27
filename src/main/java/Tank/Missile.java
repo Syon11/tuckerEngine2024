@@ -47,19 +47,19 @@ public class Missile extends MovableEntity{
     private void initialize(Tank tank) {
         if (direction == Direction.RIGHT) {
             resize(WIDTH, HEIGHT);
-            teleport(tank.getWorldX() + tank.getWidth() + OFFSET, tank.getY() + tank.getHeight() / 2 - HEIGHT / 2);
+            teleport(tank.getX() + tank.getWidth() + OFFSET, tank.getY() + tank.getHeight() / 2 - HEIGHT / 2);
         }
         else if (direction == Direction.LEFT) {
             resize(WIDTH, HEIGHT);
-            teleport(tank.getWorldX() - WIDTH - OFFSET, tank.getY() + tank.getHeight() / 2 - HEIGHT / 2);
+            teleport(tank.getX() - WIDTH - OFFSET, tank.getY() + tank.getHeight() / 2 - HEIGHT / 2);
         }
         else if (direction == Direction.UP) {
             resize(HEIGHT, WIDTH);
-            teleport(tank.getWorldX() + tank.getWidth()/2 - HEIGHT/2, tank.getY() - WIDTH - OFFSET);
+            teleport(tank.getX() + tank.getWidth()/2 - HEIGHT/2, tank.getY() - WIDTH - OFFSET);
         }
         else if (direction == Direction.DOWN) {
             resize(HEIGHT, WIDTH);
-            teleport(tank.getWorldX() + tank.getWidth()/2 - HEIGHT/2, tank.getY() + tank.getHeight() + OFFSET);
+            teleport(tank.getX() + tank.getWidth()/2 - HEIGHT/2, tank.getY() + tank.getHeight() + OFFSET);
         }
 
 

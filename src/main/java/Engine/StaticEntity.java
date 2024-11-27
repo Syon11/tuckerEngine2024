@@ -30,7 +30,7 @@ public abstract class StaticEntity {
     }
 
 
-    public int getWorldX() {
+    public int getX() {
         return worldX;
     }
 

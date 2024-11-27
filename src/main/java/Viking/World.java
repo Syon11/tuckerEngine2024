@@ -21,8 +21,14 @@ public class World {
 
     }
 
+    public void update(Vector worldPosition) {
+        map.update(worldPosition);
+    }
+
     public void draw(Canvas canvas, Vector worldPosition) {
         map.drawEarly(canvas, worldPosition);
         map.drawLate(canvas, worldPosition);
+        canvas.drawString("World PositionX: " + worldPosition.getX(), 10, 10, Color.WHITE);
+        canvas.drawString("World PositionY: " + worldPosition.getY(), 10, 20, Color.WHITE);
     }
 }

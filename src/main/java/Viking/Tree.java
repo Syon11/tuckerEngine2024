@@ -1,5 +1,6 @@
 package Viking;
 
+import Engine.Blockade;
 import Engine.Canvas;
 import Engine.StaticEntity;
 

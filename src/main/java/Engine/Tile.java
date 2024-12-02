@@ -79,6 +79,9 @@ public class Tile {
 
     public void draw(Canvas canvas, Vector worldPosition) {
         canvas.drawScaledImage(gfx, (int)(x * scale) - worldPosition.getX(), (int)(y * scale) - worldPosition.getY(), (int)(16 * scale), (int)(16 * scale));
+    }
+
+    public void drawBlockades(Canvas canvas) {
         if (blockade != null) {
             blockade.draw(canvas);
         }

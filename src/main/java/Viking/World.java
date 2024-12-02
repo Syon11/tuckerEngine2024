@@ -28,7 +28,13 @@ public class World {
     public void draw(Canvas canvas, Vector worldPosition) {
         map.drawEarly(canvas, worldPosition);
         map.drawLate(canvas, worldPosition);
-        canvas.drawString("World PositionX: " + worldPosition.getX(), 10, 10, Color.WHITE);
-        canvas.drawString("World PositionY: " + worldPosition.getY(), 10, 20, Color.WHITE);
+    }
+
+    public void drawBackground(Canvas canvas, Vector worldPosition) {
+        map.drawEarly(canvas, worldPosition);
+    }
+
+    public void drawForeground(Canvas canvas, Vector worldPosition) {
+        map.drawLate(canvas, worldPosition);
     }
 }

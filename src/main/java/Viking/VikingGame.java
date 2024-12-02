@@ -13,7 +13,6 @@ import java.awt.*;
 public class VikingGame extends Game {
     private Player player;
     private GamePad gamepad;
-    //private Tree tree;
     private World world;
 
     private int soundCooldown;
@@ -24,7 +23,6 @@ public class VikingGame extends Game {
         gamepad = new GamePad();
         player = new Player(gamepad);
         world = new World();
-        //tree = new Tree(300, 300);
         world.load();
         try {
             Clip clip = AudioSystem.getClip();
@@ -57,31 +55,14 @@ public class VikingGame extends Game {
         player.update();
         world.update(player.getWorldPosition());
 
-        /*
-        if (player.getY() < tree.getY() + 52) {
-            tree.blockadeFromTop();
-        } else {
-            tree.blockadeFromBottom();
-        }
-*/
     }
 
     @Override
     protected void draw(Canvas canvas) {
         canvas.drawRectangle(0, 0, Screen.getWidth(), Screen.getHeight(), Color.BLUE);
-        world.draw(canvas, player.getWorldPosition());
-        /*
-        if (player.getY() < tree.getY() + 52) {
-            player.draw(canvas);
-            tree.draw(canvas);
-        } else {
-            tree.draw(canvas);
-            player.draw(canvas);
-        }
-        */
+        world.drawBackground(canvas, player.getWorldPosition());
         player.draw(canvas);
+        world.drawForeground(canvas, player.getWorldPosition());
         player.drawHitbox(canvas);
-        canvas.drawString("Player PositionX: " + player.getX(), 10, 30, Color.WHITE);
-        canvas.drawString("Player PositionY: " + player.getY(), 10, 40, Color.WHITE);
     }
 }

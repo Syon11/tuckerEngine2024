@@ -4,6 +4,7 @@ import Engine.Canvas;
 import Engine.Game;
 import Engine.RenderingEngine;
 import Engine.Screen;
+import Pokemon.Enums.GameState;
 import Viking.GameConfig;
 
 import java.awt.*;

@@ -1,4 +1,4 @@
-package Pokemon;
+package Pokemon.Enums;
 
 public enum GameState {
     MOVING,

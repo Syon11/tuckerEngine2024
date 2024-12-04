@@ -2,6 +2,7 @@ package Pokemon;
 
 import Engine.*;
 import Engine.Utility.Vector;
+import Pokemon.Enums.GameState;
 
 public class Player extends ControllableEntity {
     private static final String SPRITE_PATH = "images/trainer.png";

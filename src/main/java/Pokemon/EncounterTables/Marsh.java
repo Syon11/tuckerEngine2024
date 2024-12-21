@@ -8,16 +8,17 @@ public class Marsh extends EncounterTable{
 
     public Marsh(){
         encounters = new ArrayList<>();
-        encounters.add(new Encounter(3, PkmnSpecies.BULBASAUR));
-        encounters.add(new Encounter(3, PkmnSpecies.CHARMANDER));
-        encounters.add(new Encounter(3, PkmnSpecies.SQUIRTLE));
-        encounters.add(new Encounter(25, PkmnSpecies.PIDGEY));
-        encounters.add(new Encounter(30, PkmnSpecies.RATTATA));
-        encounters.add(new Encounter(15, PkmnSpecies.SPEAROW));
-        encounters.add(new Encounter(15, PkmnSpecies.EKANS));
-        encounters.add(new Encounter(1, PkmnSpecies.PIKACHU));
-        encounters.add(new Encounter(10, PkmnSpecies.SANDSHREW));
-        encounters.add(new Encounter(10, PkmnSpecies.NIDORANF));
-        encounters.add(new Encounter(10, PkmnSpecies.NIDORANM));
+        encounters.add(new Encounter(5, PkmnSpecies.MUK));
+        encounters.add(new Encounter(5, PkmnSpecies.KOFFING));
+        encounters.add(new Encounter(10, PkmnSpecies.BELLSPROUT));
+        encounters.add(new Encounter(10, PkmnSpecies.ODDISH));
+        encounters.add(new Encounter(10, PkmnSpecies.VENONAT));
+        encounters.add(new Encounter(5, PkmnSpecies.GASTLY));
+        encounters.add(new Encounter(5, PkmnSpecies.CUBONE));
+        encounters.add(new Encounter(5, PkmnSpecies.LICKITUNG));
+        encounters.add(new Encounter(10, PkmnSpecies.TANGELA));
+
+
+
     }
 }

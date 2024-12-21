@@ -8,16 +8,16 @@ public class River extends EncounterTable {
 
     public River(){
         encounters = new ArrayList<>();
-        encounters.add(new Encounter(3, PkmnSpecies.BULBASAUR));
-        encounters.add(new Encounter(3, PkmnSpecies.CHARMANDER));
-        encounters.add(new Encounter(3, PkmnSpecies.SQUIRTLE));
-        encounters.add(new Encounter(25, PkmnSpecies.PIDGEY));
-        encounters.add(new Encounter(30, PkmnSpecies.RATTATA));
-        encounters.add(new Encounter(15, PkmnSpecies.SPEAROW));
-        encounters.add(new Encounter(15, PkmnSpecies.EKANS));
-        encounters.add(new Encounter(1, PkmnSpecies.PIKACHU));
-        encounters.add(new Encounter(10, PkmnSpecies.SANDSHREW));
-        encounters.add(new Encounter(10, PkmnSpecies.NIDORANF));
-        encounters.add(new Encounter(10, PkmnSpecies.NIDORANM));
+        encounters.add(new Encounter(20, PkmnSpecies.TENTACOOL));
+        encounters.add(new Encounter(20, PkmnSpecies.KRABBY));
+        encounters.add(new Encounter(20, PkmnSpecies.HORSEA));
+        encounters.add(new Encounter(20, PkmnSpecies.STARMIE));
+        encounters.add(new Encounter(10, PkmnSpecies.PSYDUCK));
+        encounters.add(new Encounter(10, PkmnSpecies.SLOWPOKE));
+        encounters.add(new Encounter(100, PkmnSpecies.MAGIKARP));
+        encounters.add(new Encounter(10, PkmnSpecies.POLIWAG));
+        encounters.add(new Encounter(10, PkmnSpecies.SEEL));
+        encounters.add(new Encounter(10, PkmnSpecies.SHELLDER));
+        encounters.add(new Encounter(1, PkmnSpecies.DRATINI));
     }
 }

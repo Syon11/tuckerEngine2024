@@ -16,10 +16,19 @@ public class Grassland extends EncounterTable {
         encounters.add(new Encounter(30, PkmnSpecies.RATTATA));
         encounters.add(new Encounter(15, PkmnSpecies.SPEAROW));
         encounters.add(new Encounter(15, PkmnSpecies.EKANS));
-        encounters.add(new Encounter(1, PkmnSpecies.PIKACHU));
         encounters.add(new Encounter(10, PkmnSpecies.SANDSHREW));
         encounters.add(new Encounter(10, PkmnSpecies.NIDORANF));
         encounters.add(new Encounter(10, PkmnSpecies.NIDORANM));
+        encounters.add(new Encounter(10, PkmnSpecies.GROWLITHE));
+        encounters.add(new Encounter(10, PkmnSpecies.MANKEY));
+        encounters.add(new Encounter(10, PkmnSpecies.VULPIX));
+        encounters.add(new Encounter(5, PkmnSpecies.MEOWTH));
+        encounters.add(new Encounter(5, PkmnSpecies.ABRA));
+
+
+
+
+
     }
 
 

@@ -4,6 +4,8 @@ import Engine.Canvas;
 import Engine.Game;
 import Engine.RenderingEngine;
 import Engine.Screen;
+import Pokemon.EncounterTables.Encounter;
+import Pokemon.Enums.Encounters;
 import Pokemon.Enums.GameState;
 import Viking.GameConfig;
 
@@ -44,6 +46,10 @@ public class PokemonGame extends Game {
         }
         if (gameState == GameState.MOVING) {
             world.update(player.getWorldPosition());
+            if (player.hasMoved()){
+                checkEncounters();
+
+            }
             if (gamePad.isMenuKeyPressed()) {
                 ArrayList<String> strings = new ArrayList<>();
                 strings.add("This is a test dialogue");
@@ -53,8 +59,30 @@ public class PokemonGame extends Game {
                 gameState = GameState.DIALOGUE_TYPING;
             }
         }
+        if (gameState == GameState.BATTLE_INIT) {
 
+        }
+    }
 
+    private void checkEncounters() {
+        ArrayList<Encounter> enc = new ArrayList<>();
+
+        enc.add(Encounters.CAVE.checkEncounter(player.getPlayerPosition()));
+        enc.add(Encounters.FOREST.checkEncounter(player.getPlayerPosition()));
+        enc.add(Encounters.GRASSLAND.checkEncounter(player.getPlayerPosition()));
+        enc.add(Encounters.RIVER.checkEncounter(player.getPlayerPosition()));
+        enc.add(Encounters.MARSH.checkEncounter(player.getPlayerPosition()));
+        enc.add(Encounters.MOUNTAIN.checkEncounter(player.getPlayerPosition()));
+
+        for (Encounter e : enc) {
+            if (e != null) {
+                ArrayList<String> strings = new ArrayList<>();
+                strings.add(e.getSpecies().name());
+                dialogue = new Dialogue(strings, 4);
+                gameState = GameState.DIALOGUE_TYPING;
+            }
+        }
+        enc.clear();
     }
 
     @Override
@@ -67,6 +95,13 @@ public class PokemonGame extends Game {
         if (gameState == GameState.DIALOGUE_TYPING || gameState == GameState.DIALOGUE_IDLE) {
             dialogue.Draw(canvas);
         }
+        Encounters.CAVE.DrawBounds(canvas, player.getWorldPosition());
+        Encounters.FOREST.DrawBounds(canvas, player.getWorldPosition());
+        Encounters.GRASSLAND.DrawBounds(canvas, player.getWorldPosition());
+        Encounters.RIVER.DrawBounds(canvas, player.getWorldPosition());
+        Encounters.MARSH.DrawBounds(canvas, player.getWorldPosition());
+        Encounters.MOUNTAIN.DrawBounds(canvas, player.getWorldPosition());
+
     }
 
     private void handleTypingDialogue() {

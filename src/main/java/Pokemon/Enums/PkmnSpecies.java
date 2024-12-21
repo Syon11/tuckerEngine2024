@@ -168,11 +168,26 @@ public enum PkmnSpecies {
         this.baseStats = baseStats;
         this.baseEVs = baseEVs;
         try {
-            this.front = ImageIO.read(getClass().getClassLoader().getResource("images/pokemon/front/" + number + ".png"));
-            this.back = ImageIO.read(getClass().getClassLoader().getResource("images/pokemon/back/" + number + ".png"));
+            this.front = ImageIO.read(getClass().getClassLoader().getResource("images/pkmnFronts/" + number + ".png"));
+            this.back = ImageIO.read(getClass().getClassLoader().getResource("images/pkmnBacks/" + number + ".png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+    public PkmnBaseStats getBaseStats() {
+        return baseStats;
+    }
+
+    public PkmnBaseEVs getBaseEVs() {
+        return baseEVs;
+    }
+
+    public BufferedImage getFront() {
+        return front;
+    }
+
+    public BufferedImage getBack() {
+        return back;
+    }
 }

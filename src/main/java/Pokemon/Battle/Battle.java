@@ -72,8 +72,13 @@ public class Battle {
             if (battleState == BattleState.SELECT_MOVE) {
                 selectedMove = battleMenu.getMoveSelection(gamePad);
                 if (selectedMove != 0) {
-                    player.getCurrentPokemon().getMoves().get(selectedMove).act(player.getCurrentPokemon(), opponentParty.get(opponentIndex));
-                    battleState = BattleState.OPPONENT_TURN;
+                    if (player.getCurrentPokemon().getMoves().get(selectedMove).getRemainingPP() == 0) {
+                        battleState = BattleState.SELECT_MOVE;
+                    } else {
+                        player.getCurrentPokemon().getMoves().get(selectedMove).act(player.getCurrentPokemon(), opponentParty.get(opponentIndex));
+                        player.getCurrentPokemon().getMoves().get(selectedMove).setReaminingPP(player.getCurrentPokemon().getMoves().get(selectedMove).getRemainingPP() - 1);
+                        battleState = BattleState.OPPONENT_TURN;
+                    }
                 }
             }
             if (battleState == BattleState.OPPONENT_TURN) {

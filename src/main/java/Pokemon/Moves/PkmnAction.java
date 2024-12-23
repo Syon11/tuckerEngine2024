@@ -37,6 +37,10 @@ public class PkmnAction {
         return remainingPP;
     }
 
+    public void setReaminingPP(int pp) {
+        this.remainingPP = pp;
+    }
+
     private void handleEffects(Pokemon pokemon) {
         if (move.getStatus() != null) {
             if (move.getStatusChance() > Math.random() * 100) {

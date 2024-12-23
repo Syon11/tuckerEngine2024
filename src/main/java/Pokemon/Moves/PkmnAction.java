@@ -37,6 +37,10 @@ public class PkmnAction {
         return remainingPP;
     }
 
+    public int getMaxPP() {
+        return move.getMaxPP();
+    }
+
     public void setReaminingPP(int pp) {
         this.remainingPP = pp;
     }
@@ -76,6 +80,8 @@ public class PkmnAction {
         for (PkmnTypes type : target.getType()){
             modifier = modifier * move.getPkmnType().getModifier(type);
         }
-        return (int) (((2 * level + 10) / 250 * (attack / defense) * power + 2) * modifier);
+        double damage = ((((((2 * (double)level ) / 5) + 2) * power * ((double)attack / (double)defense)) /50) + 2) * modifier;
+        return (int)damage;
+
     }
 }

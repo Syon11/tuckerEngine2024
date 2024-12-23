@@ -36,6 +36,7 @@ public class Pokemon {
             ivs[i] = (int) (Math.random() * 32);
         }
         moves = new ArrayList<>();
+        softStatuses = new ArrayList();
     }
 
     public void setLevel(int level) {
@@ -51,6 +52,9 @@ public class Pokemon {
             this.currentHealth = 0;
             status = PkmnStatus.FAINTED;
         }
+        else {
+            this.currentHealth -= damage;
+        }
     }
 
     public void healDamage(int damage) {
@@ -59,6 +63,10 @@ public class Pokemon {
         } else {
             this.currentHealth += damage;
         }
+    }
+
+    public void recoverMoves() {
+        moves.forEach(move -> move.setReaminingPP(move.getMaxPP()));
     }
 
     public void revive() {

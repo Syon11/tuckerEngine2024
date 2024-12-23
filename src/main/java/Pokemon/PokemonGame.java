@@ -11,6 +11,9 @@ import Pokemon.Enums.GameState;
 import Pokemon.Model.Pokemon;
 import Viking.GameConfig;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +34,15 @@ public class PokemonGame extends Game {
         player = new Player(gamePad);
         world = new World();
         world.load();
+        try {
+            Clip clip = AudioSystem.getClip();
+            AudioInputStream audio = AudioSystem.getAudioInputStream(getClass().getClassLoader().getResourceAsStream("bgm/music.wav"));
+            clip.open(audio);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            clip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         RenderingEngine.getInstance().getScreen().fullscreen();
         RenderingEngine.getInstance().getScreen().hideCursor();
         gameState = GameState.MOVING;
@@ -57,13 +69,16 @@ public class PokemonGame extends Game {
                 ArrayList<String> strings = new ArrayList<>();
                 strings.add("This is a test dialogue");
                 strings.add("With multiple texts of varying lenghts");
-                strings.add("And no Lorem Ipsum, we promise");
+                strings.add("And no Lorem Ipsum");
                 dialogue = new Dialogue(strings, 4);
                 gameState = GameState.DIALOGUE;
             }
         }
         if (gameState == GameState.BATTLE) {
-
+            if (battle.isBattleDone()) {
+                gameState = GameState.MOVING;
+            }
+            battle.update();
         }
     }
 
@@ -105,6 +120,7 @@ public class PokemonGame extends Game {
         Pokemon p = new Pokemon(possibleEncounter.getSpecies().name(), possibleEncounter.getSpecies());
         p.setLevel(encounterType.getRandomLevel());
         p.setMovesForLevel();
+        p.healDamage(999);
         ArrayList<Pokemon> array = new ArrayList<>();
         array.add(p);
         battle = new Battle(player, array, gamePad);

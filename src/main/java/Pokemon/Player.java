@@ -62,10 +62,16 @@ public class Player extends ControllableEntity {
         party.add(new Pokemon("Squirtle", PkmnSpecies.SQUIRTLE));
         party.get(0).setLevel(10);
         party.get(0).setMovesForLevel();
+        party.get(0).healDamage(999);
+        party.get(0).recoverMoves();
         party.get(1).setLevel(10);
         party.get(1).setMovesForLevel();
+        party.get(1).healDamage(999);
+        party.get(1).recoverMoves();
         party.get(2).setLevel(10);
         party.get(2).setMovesForLevel();
+        party.get(2).healDamage(999);
+        party.get(2).recoverMoves();
     }
 
     public List<Pokemon> getParty() {
@@ -85,13 +91,6 @@ public class Player extends ControllableEntity {
 
     public Pokemon getCurrentPokemon() {
         return party.get(currentPokemon);
-    }
-
-    public void setCurrentPokemon(int index) {
-        if (index < 0 || index >= party.size()) {
-            return;
-        }
-        currentPokemon = index;
     }
 
     public void setCurrentPokemon(Pokemon pokemon) {

@@ -35,10 +35,15 @@ public class Pokemon {
         for (int i = 0; i < 6; i++) {
             ivs[i] = (int) (Math.random() * 32);
         }
+        moves = new ArrayList<>();
     }
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public void setMovesForLevel() {
+        species.getMovesForLevel(level).forEach(move -> moves.add(new PkmnAction(move)));
     }
 
     public void takeDamage(int damage) {

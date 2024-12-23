@@ -61,8 +61,11 @@ public class Player extends ControllableEntity {
         party.add(new Pokemon("Charmander", PkmnSpecies.CHARMANDER));
         party.add(new Pokemon("Squirtle", PkmnSpecies.SQUIRTLE));
         party.get(0).setLevel(10);
+        party.get(0).setMovesForLevel();
         party.get(1).setLevel(10);
+        party.get(1).setMovesForLevel();
         party.get(2).setLevel(10);
+        party.get(2).setMovesForLevel();
     }
 
     public List<Pokemon> getParty() {

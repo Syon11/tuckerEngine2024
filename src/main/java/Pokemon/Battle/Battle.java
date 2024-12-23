@@ -53,7 +53,7 @@ public class Battle {
                 }
             }
             if(battleState == BattleState.SELECT_ACTION) {
-                playerAction = battleMenu.getBattleAction(gamePad);
+                playerAction = battleMenu.getMenuSelection(gamePad);
                 switch (playerAction) {
                     case 1:
                         battleState = BattleState.SELECT_MOVE;
@@ -70,8 +70,8 @@ public class Battle {
                 }
             }
             if (battleState == BattleState.SELECT_MOVE) {
-                selectedMove = battleMenu.getMoveSelection(gamePad);
-                if (selectedMove != 0) {
+                selectedMove = battleMenu.getMenuSelection(gamePad);
+                if (selectedMove > 0 && selectedMove <= player.getCurrentPokemon().getMoves().size()) {
                     if (player.getCurrentPokemon().getMoves().get(selectedMove).getRemainingPP() == 0) {
                         battleState = BattleState.SELECT_MOVE;
                     } else {
@@ -79,6 +79,22 @@ public class Battle {
                         player.getCurrentPokemon().getMoves().get(selectedMove).setReaminingPP(player.getCurrentPokemon().getMoves().get(selectedMove).getRemainingPP() - 1);
                         battleState = BattleState.OPPONENT_TURN;
                     }
+                }
+            }
+            if (battleState == battleState.SELECT_POKEMON) {
+                int selectedPokemon = battleMenu.getMenuSelection(gamePad);
+                if (selectedPokemon > 0 && selectedPokemon <= player.getParty().size()) {
+                    if (player.getParty().get(selectedPokemon).getCurrentHealth() > 0) {
+                        player.setCurrentPokemon(player.getParty().get(selectedPokemon));
+                        battleState = BattleState.SELECT_ACTION;
+                    }
+                }
+            }
+            if (battleState == BattleState.ATTEMPT_ESCAPE) {
+                if (Math.random() > 0.5) {
+                    isBattleDone = true;
+                } else {
+                    battleState = BattleState.OPPONENT_TURN;
                 }
             }
             if (battleState == BattleState.OPPONENT_TURN) {

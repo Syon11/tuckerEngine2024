@@ -19,7 +19,7 @@ public class BattleMenu {
         player.getCurrentPokemon().getMoves().toArray(actions);
     }
 
-    public int getBattleAction(GamePad gamePad) {
+    public int getMenuSelection(GamePad gamePad) {
         if (gamePad.isOnePressed()){
             return 1;
         }

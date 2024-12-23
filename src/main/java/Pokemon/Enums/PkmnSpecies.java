@@ -5,6 +5,7 @@ import Engine.Canvas;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import static java.util.Map.entry;
@@ -1287,6 +1288,19 @@ public enum PkmnSpecies {
             throw new RuntimeException(e);
         }
         this.learnset = learnset;
+    }
+
+    public ArrayList<PkmnMoves> getMovesForLevel(int level) {
+        ArrayList<PkmnMoves> moves = new ArrayList<>();
+        for (Map.Entry<Integer, List<PkmnMoves>> entry: learnset.entrySet()) {
+            if (level >= entry.getKey()) {
+                moves.addAll(entry.getValue());
+            }
+        }
+        if (moves.size() >= 4) {
+            moves = new ArrayList<>(moves.subList(0, 3));
+        }
+        return moves;
     }
 
     public PkmnBaseStats getBaseStats() {

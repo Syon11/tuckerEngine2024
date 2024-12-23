@@ -8,10 +8,12 @@ import Pokemon.Battle.Battle;
 import Pokemon.EncounterTables.Encounter;
 import Pokemon.Enums.Encounters;
 import Pokemon.Enums.GameState;
+import Pokemon.Model.Pokemon;
 import Viking.GameConfig;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PokemonGame extends Game {
 
@@ -66,25 +68,49 @@ public class PokemonGame extends Game {
     }
 
     private void checkEncounters() {
-        ArrayList<Encounter> enc = new ArrayList<>();
+        Encounter possibleEncounter = null;
 
-        enc.add(Encounters.CAVE.checkEncounter(player.getPlayerPosition()));
-        enc.add(Encounters.FOREST.checkEncounter(player.getPlayerPosition()));
-        enc.add(Encounters.GRASSLAND.checkEncounter(player.getPlayerPosition()));
-        enc.add(Encounters.RIVER.checkEncounter(player.getPlayerPosition()));
-        enc.add(Encounters.MARSH.checkEncounter(player.getPlayerPosition()));
-        enc.add(Encounters.MOUNTAIN.checkEncounter(player.getPlayerPosition()));
-
-        for (Encounter e : enc) {
-            if (e != null) {
-                ArrayList<String> strings = new ArrayList<>();
-                strings.add(e.getSpecies().name());
-                dialogue = new Dialogue(strings, 4);
-                gameState = GameState.DIALOGUE;
-            }
+        possibleEncounter = Encounters.CAVE.checkEncounter(player.getPlayerPosition());
+        if (possibleEncounter != null) {
+            makeEncounter(possibleEncounter, Encounters.CAVE);
+            return;
         }
-        enc.clear();
+        possibleEncounter = Encounters.FOREST.checkEncounter(player.getPlayerPosition());
+        if (possibleEncounter != null) {
+            makeEncounter(possibleEncounter, Encounters.FOREST);
+            return;
+        }
+        possibleEncounter = Encounters.GRASSLAND.checkEncounter(player.getPlayerPosition());
+        if (possibleEncounter != null) {
+            makeEncounter(possibleEncounter, Encounters.GRASSLAND);
+            return;
+        }
+        possibleEncounter = Encounters.RIVER.checkEncounter(player.getPlayerPosition());
+        if (possibleEncounter != null) {
+            makeEncounter(possibleEncounter, Encounters.RIVER);
+            return;
+        }
+        possibleEncounter = Encounters.MARSH.checkEncounter(player.getPlayerPosition());
+        if (possibleEncounter != null) {
+            makeEncounter(possibleEncounter, Encounters.MARSH);
+            return;
+        }
+        possibleEncounter = Encounters.MOUNTAIN.checkEncounter(player.getPlayerPosition());
+        if (possibleEncounter != null) {
+            makeEncounter(possibleEncounter, Encounters.MOUNTAIN);
+        }
     }
+
+    private void makeEncounter(Encounter possibleEncounter, Encounters encounterType) {
+        Pokemon p = new Pokemon(possibleEncounter.getSpecies().name(), possibleEncounter.getSpecies());
+        p.setLevel(encounterType.getRandomLevel());
+        p.setMovesForLevel();
+        ArrayList<Pokemon> array = new ArrayList<>();
+        array.add(p);
+        battle = new Battle(player, array, gamePad);
+        gameState = GameState.BATTLE;
+    }
+
 
     @Override
     protected void draw(Canvas canvas) {
@@ -96,7 +122,7 @@ public class PokemonGame extends Game {
             dialogue.Draw(canvas);
         }
         if (gameState == GameState.BATTLE) {
-            //battle.draw(canvas);
+            battle.draw(canvas);
         }
     }
 

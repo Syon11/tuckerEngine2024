@@ -50,6 +50,10 @@ public enum Encounters {
         return maxLevel;
     }
 
+    public int getRandomLevel() {
+        return new Random().nextInt(maxLevel - minLevel) + minLevel;
+    }
+
     public EncounterTable getEncTable() {
         return encTable;
     }

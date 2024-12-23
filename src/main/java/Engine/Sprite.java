@@ -38,6 +38,7 @@ public class Sprite {
     }
 
     public void loadSpriteSheet() throws IOException{
+        System.out.println(getClass().getClassLoader());
         spritesheet = ImageIO.read(getClass().getClassLoader().getResource(SPRITE_PATH));
     }
 

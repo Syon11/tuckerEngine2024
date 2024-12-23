@@ -13,6 +13,13 @@ public class GamePad extends MovementController {
     private int menuKey2 = KeyEvent.VK_BACK_SPACE;
     private int tempQuitKey = KeyEvent.VK_Q;
 
+    private int oneKey = KeyEvent.VK_1;
+    private int twoKey = KeyEvent.VK_2;
+    private int threeKey = KeyEvent.VK_3;
+    private int fourKey = KeyEvent.VK_4;
+
+
+
     public GamePad() {
         bindKey(cancelKey);
         bindKey(cancelKey2);
@@ -21,6 +28,10 @@ public class GamePad extends MovementController {
         bindKey(tempQuitKey);
         bindKey(menuKey);
         bindKey(menuKey2);
+        bindKey(oneKey);
+        bindKey(twoKey);
+        bindKey(threeKey);
+        bindKey(fourKey);
     }
 
     public boolean isCancelKeyPressed() {
@@ -37,6 +48,22 @@ public class GamePad extends MovementController {
 
     public boolean isAnyKeyPressed() {
         return isKeyPressed(cancelKey) || isKeyPressed(cancelKey2) || isKeyPressed(acceptKey) || isKeyPressed(acceptKey2) || isKeyPressed(menuKey) || isKeyPressed(menuKey2);
+    }
+
+    public boolean isOnePressed() {
+        return isKeyPressed(oneKey);
+    }
+
+    public boolean isTwoPressed() {
+        return isKeyPressed(twoKey);
+    }
+
+    public boolean isThreePressed() {
+        return isKeyPressed(threeKey);
+    }
+
+    public boolean isFourPressed() {
+        return isKeyPressed(fourKey);
     }
 
     public boolean isQuitKeyPressed() {

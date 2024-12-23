@@ -58,6 +58,28 @@ public enum PkmnTypes {
         this.dragonEffect = dragon;
         this.darkEffect = dark;
         this.fairyEffect = fairy;
+    }
 
+    public float getModifier(PkmnTypes defenderType) {
+        return switch (defenderType) {
+            case PkmnTypes.NORMAL -> normalEffect;
+            case PkmnTypes.FIGHTING -> fightingEffect;
+            case PkmnTypes.FLYING -> flyingEffect;
+            case PkmnTypes.POISON -> poisonEffect;
+            case PkmnTypes.GROUND -> groundEffect;
+            case PkmnTypes.ROCK -> rockEffect;
+            case PkmnTypes.BUG -> bugEffect;
+            case PkmnTypes.GHOST -> ghostEffect;
+            case PkmnTypes.STEEL -> steelEffect;
+            case PkmnTypes.FIRE -> fireEffect;
+            case PkmnTypes.WATER -> waterEffect;
+            case PkmnTypes.GRASS -> grassEffect;
+            case PkmnTypes.ELECTRIC -> electricEffect;
+            case PkmnTypes.PSYCHIC -> psychicEffect;
+            case PkmnTypes.ICE -> iceEffect;
+            case PkmnTypes.DRAGON -> dragonEffect;
+            case PkmnTypes.DARK -> darkEffect;
+            case PkmnTypes.FAIRY -> fairyEffect;
+        };
     }
 }

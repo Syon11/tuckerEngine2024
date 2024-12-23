@@ -4,6 +4,7 @@ import Engine.Canvas;
 import Engine.Game;
 import Engine.RenderingEngine;
 import Engine.Screen;
+import Pokemon.Battle.Battle;
 import Pokemon.EncounterTables.Encounter;
 import Pokemon.Enums.Encounters;
 import Pokemon.Enums.GameState;
@@ -19,6 +20,7 @@ public class PokemonGame extends Game {
     private World world;
     private GameState gameState;
     private Dialogue dialogue;
+    private Battle battle;
 
     @Override
     protected void initialize() {
@@ -38,11 +40,10 @@ public class PokemonGame extends Game {
             stop();
         }
         player.update(gameState);
-        if (gameState == GameState.DIALOGUE_IDLE) {
-            handleIdleDialogue();
-        }
-        if (gameState == GameState.DIALOGUE_TYPING) {
-            handleTypingDialogue();
+        if (gameState == GameState.DIALOGUE) {
+            dialogue.update();
+            gameState = dialogue.handle(gamePad);
+
         }
         if (gameState == GameState.MOVING) {
             world.update(player.getWorldPosition());
@@ -56,10 +57,10 @@ public class PokemonGame extends Game {
                 strings.add("With multiple texts of varying lenghts");
                 strings.add("And no Lorem Ipsum, we promise");
                 dialogue = new Dialogue(strings, 4);
-                gameState = GameState.DIALOGUE_TYPING;
+                gameState = GameState.DIALOGUE;
             }
         }
-        if (gameState == GameState.BATTLE_INIT) {
+        if (gameState == GameState.BATTLE) {
 
         }
     }
@@ -79,7 +80,7 @@ public class PokemonGame extends Game {
                 ArrayList<String> strings = new ArrayList<>();
                 strings.add(e.getSpecies().name());
                 dialogue = new Dialogue(strings, 4);
-                gameState = GameState.DIALOGUE_TYPING;
+                gameState = GameState.DIALOGUE;
             }
         }
         enc.clear();
@@ -91,39 +92,12 @@ public class PokemonGame extends Game {
         world.drawBackground(canvas, player.getWorldPosition());
         player.draw(canvas);
         world.drawForeground(canvas, player.getWorldPosition());
-        player.drawHitbox(canvas);
-        if (gameState == GameState.DIALOGUE_TYPING || gameState == GameState.DIALOGUE_IDLE) {
+        if (gameState == GameState.DIALOGUE) {
             dialogue.Draw(canvas);
         }
-        Encounters.CAVE.DrawBounds(canvas, player.getWorldPosition());
-        Encounters.FOREST.DrawBounds(canvas, player.getWorldPosition());
-        Encounters.GRASSLAND.DrawBounds(canvas, player.getWorldPosition());
-        Encounters.RIVER.DrawBounds(canvas, player.getWorldPosition());
-        Encounters.MARSH.DrawBounds(canvas, player.getWorldPosition());
-        Encounters.MOUNTAIN.DrawBounds(canvas, player.getWorldPosition());
-
-    }
-
-    private void handleTypingDialogue() {
-        dialogue.update();
-        if (gamePad.isCancelKeyPressed()) {
-            dialogue.skipDialogue();
-        }
-        if (dialogue.isAtLineEnd()){
-            gameState = GameState.DIALOGUE_IDLE;
+        if (gameState == GameState.BATTLE) {
+            //battle.draw(canvas);
         }
     }
 
-    private void handleIdleDialogue() {
-        dialogue.update();
-        if(gamePad.isAcceptKeyPressed()){
-            if (dialogue.isAtDialogueEnd()){
-                gameState = GameState.MOVING;
-            } else {
-                dialogue.nextLine();
-                gameState = GameState.DIALOGUE_TYPING;
-            }
-        }
-
-    }
 }

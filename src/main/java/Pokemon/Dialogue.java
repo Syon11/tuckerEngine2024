@@ -1,17 +1,19 @@
 package Pokemon;
 
 import Engine.Canvas;
+import Pokemon.Enums.GameState;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 public class Dialogue {
-    int index;
-    int currentCharacter;
-    int dialogueSpeed;
-    final int TYPING_SPEED;
+    private int index;
+    private int currentCharacter;
+    private int dialogueSpeed;
+    private final int TYPING_SPEED;
     private ArrayList<String> lines;
-
+    private boolean isIdle;
+    private boolean debouncePress;
 
     public Dialogue(ArrayList<String> strings, int typingSpeed) {
         TYPING_SPEED = typingSpeed;
@@ -53,6 +55,28 @@ public class Dialogue {
             canvas.drawRectangle(3, 403, 794, 194, Color.WHITE);
             canvas.drawString(lines.get(index).substring(0, currentCharacter), 10, 420, Color.BLACK);
         }
+    }
+
+    public GameState handle(GamePad gamePad) {
+        if (gamePad.isAcceptKeyPressed() && !debouncePress) {
+            debouncePress = true;
+            if (isIdle) {
+                if (isAtDialogueEnd()) {
+                    return GameState.MOVING;
+                }
+                nextLine();
+                isIdle = false;
+            } else {
+                skipDialogue();
+            }
+        }
+        if (!gamePad.isAcceptKeyPressed()) {
+            debouncePress = false;
+        }
+        if (currentCharacter == lines.get(index).length()) {
+            isIdle = true;
+        }
+        return GameState.DIALOGUE;
     }
 
     public boolean isAtLineEnd() {

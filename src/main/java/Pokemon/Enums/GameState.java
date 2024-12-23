@@ -2,10 +2,7 @@ package Pokemon.Enums;
 
 public enum GameState {
     MOVING,
-    DIALOGUE_TYPING,
-    DIALOGUE_IDLE,
+    DIALOGUE,
     MENU,
-    BATTLE_TURN,
-    BATTLE_DIALOGUE,
-    BATTLE_INIT
+    BATTLE,
 }

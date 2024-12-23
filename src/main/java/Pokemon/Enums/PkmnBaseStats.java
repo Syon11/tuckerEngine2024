@@ -1,5 +1,7 @@
 package Pokemon.Enums;
 
+import java.util.List;
+
 public enum PkmnBaseStats {
     BULBASAUR(64,45, 49, 49, 65, 65, 45, PkmnTypes.GRASS, PkmnTypes.POISON),
     IVYSAUR(142,60, 62, 63, 80, 80, 60, PkmnTypes.GRASS, PkmnTypes.POISON),
@@ -214,5 +216,13 @@ public enum PkmnBaseStats {
 
     public int getSpeed() {
         return speed;
+    }
+
+    public List<PkmnTypes> getTypes() {
+        if (type2 == null) {
+            return List.of(type1);
+        } else {
+            return List.of(type1, type2);
+        }
     }
 }

@@ -3,6 +3,9 @@ package Pokemon;
 import Engine.Canvas;
 import Pokemon.Enums.GameState;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -45,6 +48,15 @@ public class Dialogue {
         currentCharacter = 0;
         dialogueSpeed = TYPING_SPEED;
         index++;
+
+        try {
+            Clip clip = AudioSystem.getClip();
+            AudioInputStream audio = AudioSystem.getAudioInputStream(getClass().getClassLoader().getResourceAsStream("sfx/murloc.wav"));
+            clip.open(audio);
+            clip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void Draw(Canvas canvas) {
